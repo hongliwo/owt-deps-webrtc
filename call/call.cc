@@ -1273,6 +1273,7 @@ PacketReceiver::DeliveryStatus Call::DeliverRtp(MediaType media_type,
   // instead of converting each time it is passed to RateCounter::Add below.
   int length = static_cast<int>(parsed_packet.size());
   if (media_type == MediaType::AUDIO) {
+	RTC_LOG(LS_INFO) << "### PacketReceiver::DeliveryStatus, media_type == MediaType::AUDIO, yes,length:"<< length;
     if (audio_receiver_controller_.OnRtpPacket(parsed_packet)) {
       received_bytes_per_second_counter_.Add(length);
       received_audio_bytes_per_second_counter_.Add(length);

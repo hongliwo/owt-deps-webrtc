@@ -177,6 +177,7 @@ void DegradedCall::DestroyAudioSendStream(AudioSendStream* send_stream) {
 
 AudioReceiveStream* DegradedCall::CreateAudioReceiveStream(
     const AudioReceiveStream::Config& config) {
+	RTC_LOG(LS_INFO) << "### audio CreateAudioReceiveStream"; 
   return call_->CreateAudioReceiveStream(config);
 }
 

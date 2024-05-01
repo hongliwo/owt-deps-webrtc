@@ -19,6 +19,7 @@
 #include "call/audio_sender.h"
 #include "modules/audio_processing/include/audio_frame_proxies.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
 

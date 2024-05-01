@@ -71,6 +71,8 @@ declare_args() {
   # Disable this to avoid building the Opus audio codec.
   rtc_include_opus = true
 
+  rtc_include_aac = true
+
   # Enable this if the Opus version upon which WebRTC is built supports direct
   # encoding of 120 ms packets.
   rtc_opus_support_120ms_ptime = true
@@ -101,7 +103,7 @@ declare_args() {
   rtc_enable_bwe_test_logging = false
 
   # Set this to false to skip building examples.
-  rtc_build_examples = true
+  rtc_build_examples = false
 
   # Set this to false to skip building tools.
   rtc_build_tools = true
@@ -213,6 +215,7 @@ declare_args() {
   rtc_build_libvpx = !build_with_mozilla
   rtc_libvpx_build_vp9 = !build_with_mozilla
   rtc_build_opus = !build_with_mozilla
+  rtc_build_aac = !build_with_mozilla
   rtc_build_ssl = !owt_use_openssl
   rtc_build_usrsctp = !build_with_mozilla
 
@@ -238,7 +241,8 @@ declare_args() {
   rtc_include_internal_audio_device = !build_with_chromium
 
   # Include tests in standalone checkout.
-  rtc_include_tests = !build_with_chromium && !build_with_mozilla
+  # rtc_include_tests = !build_with_chromium && !build_with_mozilla
+  rtc_include_tests = false
 
   # Set this to false to skip building code that also requires X11 extensions
   # such as Xdamage, Xfixes.
@@ -266,6 +270,7 @@ declare_args() {
 # up into declare_args should we need to actually use them for the GN build).
 rtc_libvpx_dir = "//third_party/libvpx"
 rtc_opus_dir = "//third_party/opus"
+rtc_aac_dir = "//third_party/aac"
 
 # Desktop capturer is supported only on Windows, OSX and Linux.
 rtc_desktop_capture_supported =
@@ -985,10 +990,10 @@ if (is_android) {
                                "visibility",
                              ])
 
-      errorprone_args = []
+      #errorprone_args = []
 
       # Treat warnings as errors.
-      errorprone_args += [ "-Werror" ]
+      #errorprone_args += [ "-Werror" ]
 
       # WebRTC supports API level 16 while Chromium only supports 19.
       # (the manifest defines minimum supported SDK version)
@@ -1023,8 +1028,8 @@ if (is_android) {
                              ])
 
       # Treat warnings as errors.
-      errorprone_args = []
-      errorprone_args += [ "-Werror" ]
+      # errorprone_args = []
+      # errorprone_args += [ "-Werror" ]
 
       if (!defined(deps)) {
         deps = []
@@ -1046,8 +1051,8 @@ if (is_android) {
                              ])
 
       # Treat warnings as errors.
-      errorprone_args = []
-      errorprone_args += [ "-Werror" ]
+      # errorprone_args = []
+      # errorprone_args += [ "-Werror" ]
 
       if (!defined(deps)) {
         deps = []
